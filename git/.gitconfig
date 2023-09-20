@@ -1,0 +1,8 @@
+[maintenance]
+	repo = /home/cristian/Repositories/paru
+	repo = /home/cristian/Repositories/znap
+[user]
+	email = crislgf1@gmail.com
+	name = Cristian Guilarte
+[core]
+	editor = nvim

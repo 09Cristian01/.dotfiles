@@ -1,0 +1,7 @@
+\.git
+\.gitignore
+\.cvsignore
+^/README.*
+^/LICENSE.*
+^/COPYING
+install\.sh
