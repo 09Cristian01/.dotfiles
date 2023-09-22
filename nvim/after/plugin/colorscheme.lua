@@ -7,7 +7,7 @@ end
 require("onedarkpro").setup({
 	highlights = {
 		Comment = { italic = true },
-    		Keyword = { italic = true }
+    	Keyword = { italic = true },
   	},
 	styles = {
 		types = "italic",
