@@ -27,3 +27,7 @@ map("n", "n", "nzzzv")
 map("n", "N", "nzzzv")
 
 map("n", "<leader>x",  "<cmd>!chmod +x %<CR>", {silent = true})
+
+map("n", "<leader>=", "gg=G")
+
+map("n", "<leader>ot", function() require("utils.float_terminal")(nil, {ctrl_hjkl = false}) end)

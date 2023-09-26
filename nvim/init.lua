@@ -1,8 +1,5 @@
 --require("impatient").enable_profile()
+vim.loader.enable()
 
-require("user.core") --Load settings
-require("user.plugins") --Load plugins
-
-
-
-vim.cmd.Alpha()
+require("settings") --Load settings
+require("plugins") --Load plugins
