@@ -6,7 +6,7 @@ alias l="exa -liFGHaghUm --git --time-style=long-iso --sort type --icons --color
 alias exa-ttr="exa -liFGHaghUmT --git --color-scale --time-style=long-iso --sort type --icons -L"
 alias tree="exa -TaF --icons -L"
 alias exa-dtr="exa -TaFD --icons -L"
-alias exa-g="exa -GaxFu --sort type --icons"
+alias grid="exa -GaxFu --sort type --icons"
 
 #codium
 alias pycode="codium --user-data-dir $HOME/Projects/.vscodiumConfigs/python/profile/ --extensions-dir $HOME/Projects/.vscodiumConfigs/python/plugins/"
