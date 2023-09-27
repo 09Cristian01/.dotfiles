@@ -1,33 +1,32 @@
-local map = vim.keymap.set
-local cmd = vim.cmd
+local k = vim.keymap.set
+local c = vim.cmd
 
-map("n", "<leader>pv", cmd.Ex)
-map("n", "<C-s>v", cmd.vsplit)
-map("n", "<C-s>h", cmd.split)
+--k("n", "<leader>pv", c.Ex)
+k("n", "<C-s>v", c.vsplit)
+k("n", "<C-s>h", c.split)
 
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
-map("v", "H", "'< <gv")
-map("v", "L", "'> >gv")
+k("v", "J", ":m '>+1<CR>gv=gv")
+k("v", "K", ":m '<-2<CR>gv=gv")
+k("v", "H", "'< <gv")
+k("v", "L", "'> >gv")
 
-map("n", "<leader>ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
+k("n", "<leader>ra", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
 
-map("n", "J", "mzJ`z")
+k("n", "J", "mzJ`z")
 
-map("n", "<leader>uc", "viwU")
-map("i", "<leader>uc", "viwUi")
+k("n", "<leader>uc", "viwU")
+k("i", "<leader>uc", "viwUi")
 
-map("n", "<leader>yl", "Vip+y")
-map("i", "<leader>yl", "Vip+yi")
+k("n", "<leader>yl", "Vip+y")
+k("i", "<leader>yl", "Vip+yi")
 
-map("i", "jk", "<ESC> :w<CR>")
-map("i", "kj", "<ESC> :w<CR>")
+k("i", "jk", "<ESC> gg=G :w<CR>")
 
-map("n", "n", "nzzzv")
-map("n", "N", "nzzzv")
+k("n", "n", "nzzzv")
+k("n", "N", "nzzzv")
 
-map("n", "<leader>x",  "<cmd>!chmod +x %<CR>", {silent = true})
+k("n", "<leader>x",  "<c>!chmod +x %<CR>", {silent = true})
 
-map("n", "<leader>=", "gg=G")
+--k("n", "<leader>=", "gg=G")
 
-map("n", "<leader>ot", function() require("utils.float_terminal")(nil, {ctrl_hjkl = false}) end)
+k("n", "<leader>ot", function() require("utils.float_terminal")(nil, {ctrl_hjkl = false}) end)
