@@ -2,6 +2,7 @@ local o = vim.opt
 local g = vim.g
 
 g.mapleader = " "
+g.markdown_fenced_languages_enable_all = true
 
 o.cmdheight = 0
 
@@ -21,13 +22,19 @@ o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
 
+o.showmatch = true
 o.hlsearch = false
 o.incsearch = true
 
-o.wrap = true
+o.wrap = false
 
 o.breakindent = true
+o.autoindent = true
+o.copyindent = true
+o.smartindent = true
 
+o.expandtab = true
+o.softtabstop = 4
 o.tabstop = 4
 o.shiftwidth = 4
 
@@ -41,7 +48,7 @@ o.undodir = os.getenv("HOME") .. "/.vim/undodir"
 o.backup = false
 o.swapfile = false
 
-o.splitbelow = true
+o.splitbelow = false
 o.splitright = true
 
 o.scrolloff = 10
