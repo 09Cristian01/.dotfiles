@@ -21,7 +21,7 @@ o.foldlevel = 99
 o.foldlevelstart = 99
 o.foldenable = true
 
-o.hlsearch = true
+o.hlsearch = false
 o.incsearch = true
 
 o.wrap = true

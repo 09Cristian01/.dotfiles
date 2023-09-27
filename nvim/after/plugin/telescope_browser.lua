@@ -2,8 +2,8 @@ local fb_actions = require "telescope._extensions.file_browser.actions"
 
 vim.keymap.set(
   "n",
-  "<space>fr",
-  ":Telescope file_browser <CR>"
+  "<space>pv",
+  ":Telescope file_browser path=%:p:h select_buffer=true<CR>"
 )
 
 require("telescope").setup {

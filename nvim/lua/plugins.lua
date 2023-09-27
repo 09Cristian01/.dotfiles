@@ -22,7 +22,7 @@ ui = {
 		config = "🛠",
 		event = "📅",
 		ft = "📂",
-		config = "⚙",
+		--config = "⚙",
 		keys = "🗝",
 		plugin = "🔌",
 		runtime = "💻",
@@ -119,27 +119,36 @@ local plugins = {
 	},
 	--SQL
 	{
-		"tpope/vim-dadbod",
-		cmd = { "DB" },
+		"kristijanhusak/vim-dadbod-ui",
+		cmd = {
+			'DBUI',
+			'DBUIToggle',
+			'DBUIAddConnection',
+			'DBUIFindBuffer',
+		},
+		config = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
 		dependencies = {
+			{
+				"tpope/vim-dadbod",
+				cmd = { "DB" },
+			},
 			{
 				"kristijanhusak/vim-dadbod-completion",
 			},
-			{
-				"kristijanhusak/vim-dadbod-ui",
-				cmd = {
-					'DBUI',
-					'DBUIToggle',
-					'DBUIAddConnection',
-					'DBUIFindBuffer',
-				},
-				config = function()
-					-- Your DBUI configuration
-					vim.g.db_ui_use_nerd_fonts = 1
-				end,
-
-			},
-		}
+		},
+	},
+	--GIT
+	{
+		"mhinz/vim-signify",
+		lazy = false,
+		enabled = false,
+	},
+	{
+		"lewis6991/gitsigns.nvim",
+		lazy = false,
 	}
 }
 -- UI(ALPHA)
