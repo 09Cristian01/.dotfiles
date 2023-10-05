@@ -1,8 +1,11 @@
 local o = vim.opt
 local g = vim.g
+local c = vim.cmd
 
 g.mapleader = " "
 g.markdown_fenced_languages_enable_all = true
+
+o.syntax = "enable"
 
 o.cmdheight = 0
 
@@ -59,3 +62,14 @@ o.updatetime = 50
 o.colorcolumn = "80"
 
 o.ff = "unix"
+
+
+o.completeopt = {'menuone', 'noselect', 'noinsert'}
+o.shortmess = o.shortmess + { c = true}
+c([[
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
+
+g.vimspector_sidebar_width = 85
+g.vimspector_bottombar_height = 15
+g.vimspector_terminal_maxwidth = 70

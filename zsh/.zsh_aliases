@@ -49,7 +49,7 @@ rg --line-number . | fzf --delimiter ":" --preview "bat --color=always --highlig
 }
 
 search(){
-find /* | rg $1 | bat
+find ./ | rg $1 | bat
 }
 
 #command for docker

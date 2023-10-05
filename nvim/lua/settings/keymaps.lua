@@ -30,3 +30,15 @@ k("n", "<leader>x",  "<c>!chmod +x %<CR>", {silent = true})
 --k("n", "<leader>=", "gg=G")
 
 k("n", "<leader>ot", function() require("utils.float_terminal")(nil, {ctrl_hjkl = false}) end)
+
+
+-- Vimspector
+k("n", "<F9>", "<cmd>call vimspector#Launch()<cr>")
+k("n", "<F5>", "<cmd>call vimspector#StepOver()<cr>")
+k("n", "<F8>", "<cmd>call vimspector#Reset()<cr>")
+k("n", "<F11>", "<cmd>call vimspector#StepOver()<cr>")
+k("n", "<F12>", "<cmd>call vimspector#StepOut()<cr>")
+k("n", "<F10>", "<cmd>call vimspector#StepInto()<cr>")
+k('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>")
+k('n', "Dw", ":call vimspector#AddWatch()<cr>")
+k('n', "De", ":call vimspector#Evaluate()<cr>")
