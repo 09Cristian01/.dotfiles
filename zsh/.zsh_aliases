@@ -1,4 +1,4 @@
-#zsh
+zsh
 alias new-alias="nano $HOME/.zsh_aliases source $HOME/.zsh_aliases"
 
 #exa
@@ -17,9 +17,6 @@ alias hx="helix"
 #neovim
 alias v="nvim"
 
-#goneovim
-alias gv="goneovim --exttabline --extcmdline --extmessages --extpopupmenu"
-
 #clear
 alias clr="clear"
 
@@ -34,9 +31,12 @@ pkgI(){
 yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro sudo yay -S
 }
 
-pkgL(){
-    yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs echo "$1"
+pkgS(){
+yay -Slq | fzf --multi --preview 'yay -Si {1}' | xargs echo
+}
 
+pkgL(){
+yay -Qq | fzf --multi --preview 'yay -Qi {1}' | xargs echo "$1"
 }
 
 pkgR(){
