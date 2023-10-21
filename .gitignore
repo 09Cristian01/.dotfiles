@@ -1,2 +1,3 @@
-/.stow-local-ignore
+.stow-local-ignore
 *.pyc
+__pycache__/
