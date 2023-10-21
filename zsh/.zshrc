@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -15,14 +15,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="agnoster"
-# "powerlevel10k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k" # "agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-ZSH_THEME_RANDOM_CANDIDATES=( "powerlevel10k/powerlevel10k" "agnoster" )
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="true"
@@ -49,13 +48,13 @@ HYPHEN_INSENSITIVE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -68,7 +67,7 @@ COMPLETION_WAITING_DOTS="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -78,10 +77,15 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=()
-# sudo poetry)
+plugins=(
+    sudo 
+    zoxide 
+    zsh-autosuggestions 
+    zsh-syntax-highlighting 
+)
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.zsh_aliases
 
 # User configuration
 
@@ -111,138 +115,3 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-### EDITED BY THE USER ###
-
-# Install Znap
-# Download Znap, if it's not there yet.
-[[ -r ~/Repositories/znap/znap.zsh ]] ||
-    git clone --depth 1 -- \
-    https://github.com/marlonrichert/zsh-snap.git ~/Repositories/znap
-    source ~/Repositories/znap/znap.zsh  # Start Znap
-
-# Optimization
-[[ -r ~/Repositories/znap/znap.zsh ]] ||
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/Repositories/znap
-
-# `znap prompt` makes your prompt visible in just 15-40ms!
-#znap prompt sindresorhus/pure
-
-# `znap source` starts plugins.
-znap source marlonrichert/zsh-autocomplete
-znap source zsh-users/zsh-autosuggestions
-znap source zsh-users/zsh-syntax-highlighting
-
-# Created by `pipx` on 2023-08-08 16:39:08
-export PATH="$PATH:/home/cristian/.local/bin"
-
-## Load aliases
-source $HOME/.zsh_aliases
-
-# Enable vim keydings
-#bindkey -v
-
-# =============================================================================
-#
-# Utility functions for zoxide.
-#
-
-# pwd based on the value of _ZO_RESOLVE_SYMLINKS.
-function __zoxide_pwd() {
-    pwd -L
-}
-
-# cd + custom logic based on the value of _ZO_ECHO.
-function __zoxide_cd() {
-    # shellcheck disable=SC2164
-    cd -- "$@"
-}
-
-# =============================================================================
-#
-# Hook configuration for zoxide.
-#
-
-# Hook to add new entries to the database.
-function __zoxide_hook() {
-    # shellcheck disable=SC2312
-    zoxide add -- "$(__zoxide_pwd)"
-}
-
-# Initialize hook.
-# shellcheck disable=SC2154
-if [[ ${precmd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]] && [[ ${chpwd_functions[(Ie)__zoxide_hook]:-} -eq 0 ]]; then
-    chpwd_functions+=(__zoxide_hook)
-fi
-
-# =============================================================================
-#
-# When using zoxide with --no-cmd, alias these internal functions as desired.
-#
-
-__zoxide_z_prefix='z#'
-
-# Jump to a directory using only keywords.
-function __zoxide_z() {
-    # shellcheck disable=SC2199
-    if [[ "$#" -eq 0 ]]; then
-        __zoxide_cd ~
-    elif [[ "$#" -eq 1 ]] && { [[ -d "$1" ]] || [[ "$1" = '-' ]] || [[ "$1" =~ ^[-+][0-9]$ ]]; }; then
-        __zoxide_cd "$1"
-    elif [[ "$@[-1]" == "${__zoxide_z_prefix}"?* ]]; then
-        # shellcheck disable=SC2124
-        local result="${@[-1]}"
-        __zoxide_cd "${result:${#__zoxide_z_prefix}}"
-    else
-        local result
-        # shellcheck disable=SC2312
-        result="$(\command zoxide query --exclude "$(__zoxide_pwd)" -- "$@")" &&
-            __zoxide_cd "${result}"
-    fi
-}
-
-# Jump to a directory using interactive search.
-function __zoxide_zi() {
-    local result
-    result="$(\command zoxide query --interactive -- "$@")" && __zoxide_cd "${result}"
-}
-
-# Completions.
-if [[ -o zle ]]; then
-    function __zoxide_z_complete() {
-        # Only show completions when the cursor is at the end of the line.
-        # shellcheck disable=SC2154
-        [[ "${#words[@]}" -eq "${CURRENT}" ]] || return 0
-
-        if [[ "${#words[@]}" -eq 2 ]]; then
-            _files -/
-        elif [[ "${words[-1]}" == '' ]] && [[ "${words[-2]}" != "${__zoxide_z_prefix}"?* ]]; then
-            local result
-            # shellcheck disable=SC2086,SC2312
-            if result="$(\command zoxide query --exclude "$(__zoxide_pwd)" --interactive -- ${words[2,-1]})"; then
-                result="${__zoxide_z_prefix}${result}"
-                # shellcheck disable=SC2296
-                compadd -Q "${(q-)result}"
-            fi
-            printf '\e[5n'
-        fi
-        return 0
-    }
-
-    bindkey '\e[0n' 'reset-prompt'
-    [[ "${+functions[compdef]}" -ne 0 ]] && \compdef __zoxide_z_complete __zoxide_z
-fi
-
-# =============================================================================
-#
-# Commands for zoxide. Disable these using --no-cmd.
-#
-
-alias z=__zoxide_z
-alias zi=__zoxide_zi
-
-# =============================================================================
-#
-# To initialize zoxide, add this to your configuration (usually ~/.zshrc):
-#
-eval "$(zoxide init zsh)"

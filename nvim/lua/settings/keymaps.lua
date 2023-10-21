@@ -1,8 +1,8 @@
 local k = vim.keymap.set
 local c = vim.cmd
 
-k({"n", "i"}, "<M-q>", ":qa<CR>")
-k({"n", "i"}, "<M-w>", ":wa<CR>")
+k({"n", "i"}, "<M-q>", "<ESC>:qa<CR>")
+k({"n", "i"}, "<M-w>", "<ESC>:wa<CR>")
 
 k("v", "J", ":m '>+1<CR>gv=gv")
 k("v", "K", ":m '<-2<CR>gv=gv")

@@ -2,39 +2,43 @@ import os
 import subprocess
 
 from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Match, Screen, Key
+from libqtile.config import Click, Drag, Match, Screen, Key, Group
 from libqtile.lazy import lazy
+from libqtile.utils import send_notification
 
 # from qtile_extras import widget
 # from qtile_extras.widget.decorations import RectDecoration
 
-import keymaps as k
-import color_scheme as s
-import functions as f
+import my_keymaps as k
+import my_colors as s
+import my_functions as f
+
+# import my_layouts as l
+# import my_hooks as h
 
 keys = k.keys
-groups = k.groups
+groups = [Group(i) for i in "1234567890"]
+# layouts = l.layouts
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
             Key(
-                [k.mod],
+                [k.M],
                 i.name,
                 lazy.group[i.name].toscreen(),
                 desc="Switch to group {}".format(i.name),
             ),
             # mod1 + shift + letter of group = switch to & move focused window to group
             Key(
-                [k.mod, "shift"],
+                [k.M, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
                 desc="Switch to & move focused window to group {}".format(i.name),
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
-            # Key([k.mod, "shift"], i.name, lazy.window.togroup(i.name),
+            # Key([k.M, "shift"], i.name, lazy.window.togroup(i.name),
             #     desc="move focused window to group {}".format(i.name)),
         ]
     )
@@ -112,6 +116,7 @@ screens = [
                     format="{char} {percent:2.0%} {hour:d}h{min:02d}",
                     low_background=s.palette["alert"],
                     low_percentage=0.25,
+                    update_interval=1,
                     **s.widget_theme,
                 ),
                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
@@ -139,18 +144,18 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag(
-        [k.mod],
+        [k.M],
         "Button1",
         lazy.window.set_position_floating(),
         start=lazy.window.get_position(),
     ),
     Drag(
-        [k.mod],
+        [k.M],
         "Button3",
         lazy.window.set_size_floating(),
         start=lazy.window.get_size(),
     ),
-    Click([k.mod], "Button2", lazy.window.bring_to_front()),
+    Click([k.M], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
@@ -191,16 +196,18 @@ wl_input_rules = None
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
-### EDITED BY THE USER ###
-"""
+
 @hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('/home/cristian/.config/qtile/autostart.sh')
-    subprocess.Popen([home])
-"""
-
-
-@hook.subscribe.startup
 def autostart():
     home = os.path.expanduser("~/.config/qtile/autostart.sh")
     subprocess.call([home])
+
+
+@hook.subscribe.startup_complete
+def run_every_startup():
+    send_notification("Qtile", "Startup Complete!")
+
+
+@hook.subscribe.restart
+def run_every_restart():
+    send_notification("qtile", "Restarting...")
