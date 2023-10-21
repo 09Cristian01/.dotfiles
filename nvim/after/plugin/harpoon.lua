@@ -1,3 +1,4 @@
+--[==[
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
@@ -18,3 +19,4 @@ k("n", "<leader>t6", function() ui.nav_file(6) end)
 k("n", "<leader>t7", function() ui.nav_file(7) end)
 k("n", "<leader>t8", function() ui.nav_file(8) end)
 k("n", "<leader>t9", function() ui.nav_file(9) end)
+--]==]

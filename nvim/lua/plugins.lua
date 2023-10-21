@@ -12,41 +12,41 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local opts = {								-- set up configurations
-    defaults = {
-        lazy = true,
+defaults = {
+    lazy = true,
+},
+ui = {
+    border = "none", -- rounded
+    icons = {
+        cmd = "⌘",
+        config = "🛠",
+        event = "📅",
+        ft = "📂",
+        --config = "⚙",
+        keys = "🗝",
+        plugin = "🔌",
+        runtime = "💻",
+        source = "📄",
+        start = " ",
+        task = "📌",
+        lazy = "󰒲 ",
     },
-    ui = {
-        border = "none", -- rounded
-        icons = {
-            cmd = "⌘",
-            config = "🛠",
-            event = "📅",
-            ft = "📂",
-            --config = "⚙",
-            keys = "🗝",
-            plugin = "🔌",
-            runtime = "💻",
-            source = "📄",
-            start = " ",
-            task = "📌",
-            lazy = "󰒲 ",
+},
+change_detection = {
+    notify = true,
+},
+performance = {
+    rtp = {
+        disabled_plugins = {
+            "gzip",
+            "netrwPlugin",
+            "tarPlugin",
+            "tohtml",
+            "zipPlugin",
+            "tutor",
         },
     },
-    change_detection = {
-        notify = true,
-    },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                "netrwPlugin",
-                "tarPlugin",
-                "tohtml",
-                "zipPlugin",
-                "tutor",
-            },
-        },
-    },
+},
 }
 
 local plugins = {
@@ -101,6 +101,7 @@ local plugins = {
         lazy = false,
     },
     {
+        enabled = false,
         "theprimeagen/harpoon",
         event = "VeryLazy",
         dependencies = { "nvim-lua/plenary.nvim" },
