@@ -17,24 +17,37 @@ import my_functions as f
 # import my_hooks as h
 
 keys = k.keys
-groups = [Group(i) for i in "1234567890"]
 # layouts = l.layouts
 
-for i in groups:
+groups = [
+    Group("SYS"),
+    Group(
+        "TER",
+        matches=[Match(wm_class=["kitty"])],
+        exclusive=False,
+        spawn="kitty",
+    ),
+    Group(
+        "WEB",
+        matches=[Match(wm_class=["thorium-browser", "librewolf"])],
+        exclusive=True,
+    ),
+]
+for index, group in enumerate(groups):
     keys.extend(
         [
             Key(
                 [k.M],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
+                str(index+1),
+                lazy.group[group.name].toscreen(),
+                desc="Switch to group {}".format(group.name),
             ),
             # mod1 + shift + letter of group = switch to & move focused window to group
             Key(
                 [k.M, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                str(index+1),
+                lazy.window.togroup(group.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(group.name),
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
@@ -53,7 +66,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
+    font="Ubuntu",
     fontsize=12,
     padding=3,
 )
@@ -71,11 +84,11 @@ screens = [
                 ),
                 widget.GroupBox(
                     highlight_method="block",
-                    active=s.palette["black"],
                     disable_drag=True,
-                    hide_unused=True,
+                    hide_unused=False,
                     rounded=False,
                     margin_x=0,
+                    active=s.palette["purple"],
                     inactive=s.palette["gray"],
                     this_current_screen_border=s.palette["active"],
                     this_screen_border=s.palette["inactive"],
@@ -93,15 +106,18 @@ screens = [
                     parse_text=f.parse_names,
                     **s.widget_theme,
                 ),
-                # widget.Chord(
-                #     chords_colors={
-                #    "launch": ("#ff0000", "#ffffff"),
-                # },
-                # name_transform=lambda name: name.upper(),
-                # ),
-                # widget.TextBox("default config", name="default"),
                 widget.CurrentLayoutIcon(
                     **s.widget_theme,
+                ),
+                widget.Volume(
+                    fmt="VOL:{}",
+                    check_mute_string="[off]",
+                    emoji=False,
+                    step=5,
+                    limit_max_volume=True,
+                    get_volume_command=r"amixer sget Master | rg 'Front Left:' | awk -F ' ' '{print $5}' | sed 's/\[//' | sed 's/\]//'",
+                    check_mute_command=r"amixer sget Master | rg 'Front Left:' | awk -F ' ' '{print $6}'",
+                    **s.widget_theme
                 ),
                 widget.CheckUpdates(
                     colour_have_updates=s.palette["purple"],
@@ -119,13 +135,12 @@ screens = [
                     update_interval=1,
                     **s.widget_theme,
                 ),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 widget.Clock(
                     format="%Y/%m/%d %H:%M",
                     **s.widget_theme,
                 ),
                 widget.QuickExit(
+                    count=1,
                     **s.widget_theme,
                 ),
                 widget.Spacer(

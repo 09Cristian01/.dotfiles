@@ -17,6 +17,7 @@ widget_theme = {
     "foreground": palette["gray"],
     "font": "Ubuntu Bold",
     "fontsize": 12,
+    # "max_chars": 50,
 }
 
 layout_theme = {
