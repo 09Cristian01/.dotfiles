@@ -10,13 +10,14 @@ C = "control"
 S = "shift"
 P = "space"
 
-EDITOR = "kitty nvim"
+TMUX = "tmux new"
+EDITOR = f"kitty {TMUX} nvim"
 BROWSER = "thorium-browser"
-TERMINAL = "kitty"
+TERMINAL = f"kitty {TMUX}"
 CONSOLE = "zsh"
 MENU = "rofi"
-TASK_MANAGER = "btop"
-FILE_MANAGER = "ranger"
+TASK_MANAGER = "kitty btop"
+FILE_MANAGER = "kitty ranger"
 
 keys = [
     # vvv ARROWS vvv

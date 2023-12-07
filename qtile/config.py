@@ -23,14 +23,14 @@ groups = [
     Group("SYS"),
     Group(
         "TER",
-        matches=[Match(wm_class=["kitty"])],
+        # matches=[Match(wm_class=["kitty"])],
         exclusive=False,
-        spawn="kitty",
+        spawn=k.TERMINAL,
     ),
     Group(
         "WEB",
         matches=[Match(wm_class=["thorium-browser", "librewolf"])],
-        exclusive=True,
+        exclusive=False,
     ),
 ]
 for index, group in enumerate(groups):
@@ -38,14 +38,14 @@ for index, group in enumerate(groups):
         [
             Key(
                 [k.M],
-                str(index+1),
+                str(index + 1),
                 lazy.group[group.name].toscreen(),
                 desc="Switch to group {}".format(group.name),
             ),
             # mod1 + shift + letter of group = switch to & move focused window to group
             Key(
                 [k.M, "shift"],
-                str(index+1),
+                str(index + 1),
                 lazy.window.togroup(group.name, switch_group=True),
                 desc="Switch to & move focused window to group {}".format(group.name),
             ),
@@ -53,9 +53,27 @@ for index, group in enumerate(groups):
             # # mod1 + shift + letter of group = move focused window to group
             # Key([k.M, "shift"], i.name, lazy.window.togroup(i.name),
             #     desc="move focused window to group {}".format(i.name)),
+    ]
+    )
+"""
+groups = [i for i in "123456789"]
+
+for group in groups:
+    keys.extend(
+        [
+            Key(
+                [k.M],
+                group,
+                lazy.group[group].toscreen(),
+            ),
+            Key(
+                [k.M, k.S],
+                group,
+                lazy.window.togroup(group, switch_group=True),
+            ),
         ]
     )
-
+"""
 layouts = [
     layout.Columns(
         **s.layout_theme,
@@ -117,7 +135,7 @@ screens = [
                     limit_max_volume=True,
                     get_volume_command=r"amixer sget Master | rg 'Front Left:' | awk -F ' ' '{print $5}' | sed 's/\[//' | sed 's/\]//'",
                     check_mute_command=r"amixer sget Master | rg 'Front Left:' | awk -F ' ' '{print $6}'",
-                    **s.widget_theme
+                    **s.widget_theme,
                 ),
                 widget.CheckUpdates(
                     colour_have_updates=s.palette["purple"],

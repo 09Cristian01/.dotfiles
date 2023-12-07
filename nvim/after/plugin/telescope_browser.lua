@@ -18,7 +18,7 @@ require("telescope").setup {
 			depth = 1,
 			auto_depth = false,
 			select_buffer = true,
-			hidden = { file_browser = false, folder_browser = false },
+			hidden = { file_browser = true, folder_browser = true},
 			respect_gitignore = vim.fn.executable "fd" == 1,
 			follow_symlinks = true,
 			browse_files = require("telescope._extensions.file_browser.finders").browse_files,

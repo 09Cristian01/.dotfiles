@@ -19,7 +19,8 @@ k("i", "<leader>uc", "<ESC>viwUi")
 --k("n", "<leader>yl", "V+y")
 --k("i", "<leader>yl", "<ESC>V+yi")
 
-k("i", "jk", "<ESC> gg=G :w<CR>")
+--k("i", "jk", "<ESC> gg=G :w<CR>")
+k("i", "jk", "<ESC> :w<CR>")
 
 k("n", "n", "nzzzv")
 k("n", "N", "nzzzv")

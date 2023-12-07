@@ -1,5 +1,6 @@
 #zsh
 alias new-alias="nano $HOME/.zsh_aliases; source $HOME/.zsh_aliases"
+alias conf-zsh="nvim $HOME/.zshrc; exec zsh"
 
 #eza
 alias l="eza -1liFXHaghU --icons=always --color=always --sort=type --time-style=long-iso --git --git-repos --color-scale"
@@ -16,12 +17,14 @@ alias grid="eza -1GiFXHaghU --icons=always --color=always --sort=type --time-sty
 
 #neovim
 alias v="nvim"
+alias todo="nvim $HOME/Desktop/todo.md"
 
 #clear
 alias cls="clear"
 
 #rm
-alias del="rm -dIR"
+alias rm="trash-put"
+alias del="rm -diR"
 
 #kitty
 alias see="kitty +kitten icat"
@@ -63,3 +66,16 @@ docker ps -a
 echo "\n#### #[NETWORKS]# ####"
 docker network ls
 }
+
+confirm(){
+	echo -n "Do you want to continue with $*? [N/y] "
+	read -sq REPLY
+	echo
+	if [[ "$REPLY" = "y" ]]; then
+		"$@"
+	else
+		echo "$* cancelled by user"
+	fi
+}
+
+alias update="yay --answerclean "A" --answerdiff "N" --answeredit "N" --answerupgrade "A" --removemake --cleanafter --norebuild --noredownload --quiet --useask --pgpfetch=false; confirm reboot"

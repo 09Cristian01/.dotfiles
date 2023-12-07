@@ -5,39 +5,27 @@ end
 
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = {
-    [[             mm                                                           ]],
-    [[*@@@***@@m *@@@                            *@@@***@@@                    	]],
-    [[  @@    @@   @@                              @@    *@                    	]],
-    [[  @@    @@   @@  *@@@  *@@@    mm@*@@        @@   @    m@@*@@m *@@*   *@@*]],
-    [[  @@***@mm   !@    @@    @@   m@*   @@       @@**@@   @@*   *@@  *@@ m@*  ]],
-    [[  @!    *@   !@    !@    @@   !@******       !@   @   @@     @@    @@@    ]],
-    [[  !!    m@   !@    !@    @!   !@m    m       !@       @@     !@    !!@@   ]],
-    [[  !:    *!   !!    !@    !!   !!******       !!       !@     !!    !!@    ]],
-    [[  !:    !!   :!    !!    !!   :!!            :!       !!!   !!!  !!* !!!  ]],
-    [[: !: : : : : : :   :: !: :!:   : : ::      :!: :       : : : :  ::    :!: ]],
-    [[                                                                          ]],
-    --[==[
-    [[	            ▄▄                                                   ]],   
-    [[▀███▀▀▀██▄▀███                        ▀███▀▀▀███                   ]],
-    [[  ██    ██  ██                          ██    ▀█                   ]],
-    [[  ██    ██  ██ ▀███  ▀███   ▄▄█▀██      ██   █   ▄██▀██▄▀██▀   ▀██▀]],
-    [[  ██▀▀▀█▄▄  ▓█   ██    ██  ▄█▀   ██     ██▀▀██  ██▀   ▀██ ▀██ ▄█▀  ]],
-    [[  █▓    ▀█  ▓█   ▓█    ██  ▓█▀▀▀▀▀▀     ▓█   █  ██     ██   ███    ]],
-    [[  ▓▓    ▄█  ▓█   ▓█    █▓  ▓█▄    ▄     ▓█      ██     ▓█   ▓▓██   ]],
-    [[  ▓▒    ▀▓  ▓▓   ▓█    ▓▓  ▓▓▀▀▀▀▀▀     ▓▓      ▓█     ▓▓   ▓▓█    ]],
-    [[  ▓▒    ▓▓  ▒▓   ▓▓    ▓▓  ▒▓▓          ▒▓      ▓▓▓   ▓▓▓ ▓▓▀ ▓▓▓  ]],
-    [[▒ ▓▒ ▒ ▒ ▒▒ ▒ ▒  ▒▒ ▓▒ ▒▓▒  ▒ ▒ ▒▒    ▒▓▒ ▒      ▒ ▒ ▒ ▒ ▒▒    ▒▓▒ ]],
-    [[																     ]],
-    --]==]
+    "                                              ",
+    "                                              ",
+    "   _..._ .----.     .----..--. __  __   ___   ",
+    " .'     '.\\    \\   /    / |__||  |/  `.'   `. ",
+    ".   .-.   .'   '. /'   /  .--.|   .-.  .-.   '",
+    "|  '   '  ||    |'    /   |  ||  |  |  |  |  |",
+    "|  |   |  ||    ||    |   |  ||  |  |  |  |  |",
+    "|  |   |  |'.   `'   .'   |  ||  |  |  |  |  |",
+    "|  |   |  | \\        /    |  ||  |  |  |  |  |",
+    "|  |   |  |  \\      /     |__||__|  |__|  |__|",
+    "|  |   |  |   '----'                          ",
+    "|  |   |  |                                   ",
+    "'--'   '--'                                    ",
 }
 dashboard.section.buttons.val = {
     dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-    --	dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
     dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
     dashboard.button("t", "󱎸  Find text", ":Telescope live_grep <CR>"),
     dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-    --dashboard.button("p", "  Plugins", ":e $MYVIMRC/lua/plugins.lua<CR>"),
+    dashboard.button("a", "  Plugins", ":e $HOME/.config/nvim/lua/plugins.lua <CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 }
 
@@ -57,31 +45,5 @@ dashboard.section.header.opts.hl = "Include"
 dashboard.section.buttons.opts.hl = "Keyword"
 
 dashboard.opts.opts.noautocmd = false
--- vim.cmd([[autocmd User AlphaReady echo 'ready']])
+vim.cmd([[autocmd User AlphaReady echo 'ready']])
 alpha.setup(dashboard.opts)
-
---[[
-mm                                                           
-*@@@***@@m *@@@                            *@@@***@@@                     
-@@    @@   @@                              @@    *@                     
-@@    @@   @@  *@@@  *@@@    mm@*@@        @@   @    m@@*@@m *@@*   *@@*
-@@***@mm   !@    @@    @@   m@*   @@       @@**@@   @@*   *@@  *@@ m@*  
-@!    *@   !@    !@    @@   !@******       !@   @   @@     @@    @@@    
-!!    m@   !@    !@    @!   !@m    m       !@       @@     !@    !!@@   
-!:    *!   !!    !@    !!   !!******       !!       !@     !!    !!@    
-!:    !!   :!    !!    !!   :!!            :!       !!!   !!!  !!* !!!  
-: !: : : : : : :   :: !: :!:   : : ::      :!: :       : : : :  ::    :!: 
-
-
-▄▄                                                     
-▀███▀▀▀██▄▀███                        ▀███▀▀▀███                   
-██    ██  ██                          ██    ▀█                   
-██    ██  ██ ▀███  ▀███   ▄▄█▀██      ██   █   ▄██▀██▄▀██▀   ▀██▀
-██▀▀▀█▄▄  ▓█   ██    ██  ▄█▀   ██     ██▀▀██  ██▀   ▀██ ▀██ ▄█▀  
-█▓    ▀█  ▓█   ▓█    ██  ▓█▀▀▀▀▀▀     ▓█   █  ██     ██   ███    
-▓▓    ▄█  ▓█   ▓█    █▓  ▓█▄    ▄     ▓█      ██     ▓█   ▓▓██   
-▓▒    ▀▓  ▓▓   ▓█    ▓▓  ▓▓▀▀▀▀▀▀     ▓▓      ▓█     ▓▓   ▓▓█    
-▓▒    ▓▓  ▒▓   ▓▓    ▓▓  ▒▓▓          ▒▓      ▓▓▓   ▓▓▓ ▓▓▀ ▓▓▓  
-▒ ▓▒ ▒ ▒ ▒▒ ▒ ▒  ▒▒ ▓▒ ▒▓▒  ▒ ▒ ▒▒    ▒▓▒ ▒      ▒ ▒ ▒ ▒ ▒▒    ▒▓▒ 
-
---]]
